@@ -1,10 +1,11 @@
+// src/lib/roomsStore.js
 import { writable, derived } from 'svelte/store';
 
 export const rooms = writable([]);
 export const tags = writable([]);
 export const loading = writable(false);
+export const selectedGender = writable('f'); // default: female
 export const selectedTag = writable(null);
-export const selectedGender = writable(null);
 
 const allowedTags = [
   "alt","anal","asian","ass","blonde","bigtits","brunette","cosplay","curvy","english","feet",
@@ -13,47 +14,40 @@ const allowedTags = [
   "gaming","lingerie","yoga"
 ];
 
-// 🧩 Fetch and populate the rooms and tags
 export async function fetchRooms() {
   loading.set(true);
   try {
-    const res = await fetch("https://api.dimecams.com/api/rooms");
+    const res = await fetch('https://api.dimecams.com/api/rooms');
     const data = await res.json();
     const results = data.results || [];
     rooms.set(results);
 
-    const tagSet = new Set();
-    results.forEach(room => {
-      room.tags?.forEach(tag => {
+    // collect tags globally
+    const set = new Set();
+    results.forEach(r => {
+      r.tags?.forEach(tag => {
         const lower = tag.toLowerCase();
-        if (allowedTags.includes(lower)) tagSet.add(tag);
+        if (allowedTags.includes(lower)) set.add(tag);
       });
     });
-    tags.set([...tagSet].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' })));
+    tags.set(Array.from(set).sort((a, b) => a.localeCompare(b)));
   } catch (err) {
-    console.error("Failed to fetch rooms:", err);
+    console.error('❌ Failed to fetch rooms:', err);
   } finally {
     loading.set(false);
   }
 }
 
-// 💡 Derived store that filters based on current selections
+// 🔍 Derived store that filters by both gender + tag
 export const filteredRooms = derived(
-  [rooms, selectedTag, selectedGender],
-  ([$rooms, $selectedTag, $selectedGender]) => {
-    let filtered = $rooms;
-
-    if ($selectedGender) {
-      filtered = filtered.filter(r => r.gender === $selectedGender);
-    }
-
-    if ($selectedTag) {
-      const tagLower = $selectedTag.toLowerCase();
-      filtered = filtered.filter(r =>
-        r.tags?.some(t => t.toLowerCase() === tagLower)
-      );
-    }
-
-    return filtered;
+  [rooms, selectedGender, selectedTag],
+  ([$rooms, $selectedGender, $selectedTag]) => {
+    return $rooms.filter((r) => {
+      const genderMatch = !$selectedGender || r.gender === $selectedGender;
+      const tagMatch =
+        !$selectedTag ||
+        (r.tags && r.tags.some((t) => t.toLowerCase() === $selectedTag.toLowerCase()));
+      return genderMatch && tagMatch;
+    });
   }
 );

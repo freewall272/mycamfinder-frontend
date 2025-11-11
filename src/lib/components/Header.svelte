@@ -1,15 +1,32 @@
 <script>
   import { onMount } from 'svelte';
-  import { tags, fetchRooms } from '$lib/roomsStore.js';
   import { page } from '$app/stores';
+  import { goto } from '$app/navigation';
+  import { tags, fetchRooms, selectedTag, selectedGender } from '$lib/roomsStore.js';
 
-  // Get current route (e.g., '/', '/f', '/m', etc.)
-  $: currentPath = $page.url.pathname;
+  $: currentPath = $page.url.pathname; // to detect if we're on the homepage
 
-  // Fetch rooms/tags on mount (once)
   onMount(async () => {
     if ($tags.length === 0) await fetchRooms();
   });
+
+  function selectTag(tag) {
+    // Toggle selection
+    const isSameTag = tag === $selectedTag;
+    selectedTag.set(isSameTag ? null : tag);
+
+    // 🏠 If we're on the homepage, navigate to /f
+    if (currentPath === '/' && !isSameTag) {
+      selectedGender.set('f');
+      goto('/f');
+    }
+  }
+
+  function changeGender(g) {
+    selectedGender.set(g);
+    selectedTag.set(null);
+    goto(`/${g}`);
+  }
 </script>
 
 <header class="w-full bg-black border-b border-gray-800 text-white">
@@ -23,13 +40,15 @@
 
   <!-- 🌈 TAG SCROLLER -->
   <div class="px-4 py-2 bg-black">
-    <div
-      class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory scroll-smooth"
-      style="scrollbar-width: none;"
-    >
+    <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
       {#each $tags as tag}
         <button
-          class="snap-start whitespace-nowrap flex-shrink-0 cursor-pointer px-3 py-1.5 rounded-full bg-zinc-800 text-sm sm:text-base text-white hover:bg-pink-600 transition"
+          on:click={() => selectTag(tag)}
+          class="snap-start whitespace-nowrap flex-shrink-0 cursor-pointer px-3 py-1.5 rounded-full
+                 text-sm sm:text-base transition
+                 { $selectedTag === tag
+                    ? 'bg-pink-600 text-white'
+                    : 'bg-zinc-800 text-white hover:bg-pink-600' }"
         >
           #{tag}
         </button>
@@ -45,15 +64,15 @@
       { label: 'Couples', value: 'c' },
       { label: 'Trans', value: 't' }
     ] as g}
-      <a
-        href={`/${g.value}`}
-        class="flex-1 min-w-[70px] py-3 rounded-md font-semibold text-xs sm:text-sm uppercase tracking-wide text-center transition
-          {currentPath === `/${g.value}` || (currentPath === '/' && g.value === 'f')
-            ? 'bg-pink-600 text-white'
-            : 'bg-gray-800 text-white hover:bg-pink-600 hover:text-white'}"
+      <button
+        on:click={() => changeGender(g.value)}
+        class="flex-1 min-w-[70px] py-3 rounded-md font-semibold text-xs sm:text-sm uppercase tracking-wide text-center
+               transition { $selectedGender === g.value
+                  ? 'bg-pink-600 text-white'
+                  : 'bg-gray-800 text-white hover:bg-pink-600' }"
       >
         {g.label}
-      </a>
+      </button>
     {/each}
   </div>
 </header>
