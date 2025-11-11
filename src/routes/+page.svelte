@@ -28,7 +28,7 @@
   <section class="border-t border-gray-800 pt-6">
     <div class="flex items-center justify-between mb-3">
       <h2 class="text-xl font-semibold text-white">Top Models</h2>
-      <a href="/top" class="text-sm text-pink-500 hover:text-pink-400">Show All →</a>
+      <a href="/f" class="text-sm text-pink-500 hover:text-pink-400">Show All →</a>
     </div>
 
     {#if $loading}
@@ -46,7 +46,7 @@
   <section class="border-t border-gray-800 pt-6">
     <div class="flex items-center justify-between mb-3">
       <h2 class="text-xl font-semibold text-white">New Models</h2>
-      <a href="/new" class="text-sm text-pink-500 hover:text-pink-400">Show All →</a>
+      <a href="/f" class="text-sm text-pink-500 hover:text-pink-400">Show All →</a>
     </div>
 
     {#if $loading}
