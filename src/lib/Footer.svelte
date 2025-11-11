@@ -15,7 +15,7 @@
     <!-- 🛠️ Section 2: Support -->
     <div>
       <div class="border-t border-gray-200 pt-6 mb-4"></div>
-      <h3 class="text-white font-semibold text-lg mb-3">Support</h3>
+      <h3 class="text-white font-semibold text-lg mb-3">Support & Policy</h3>
       <ul class="space-y-2">
         <li><a href="/faq" class="hover:text-pink-400 transition">FAQ</a></li>
         <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdrSPKQcZZeeaMclGKoQFOWh7YkjnF6GZb8ke8TAVQhuGK_yw/viewform?usp=dialog" class="hover:text-pink-400 transition">Contact Us</a></li>
