@@ -8,7 +8,7 @@
       <ul class="space-y-2">
 
         <li><a href="/about" class="hover:text-pink-400 transition">About</a></li>
-        <li><a href="/reviews" class="hover:text-pink-400 transition">Model Reviews</a></li>
+        <li><p class="text-gray-400 hover:text-pink-400 transition">Model Reviews</p></li>
       </ul>
     </div>
 
@@ -18,7 +18,7 @@
       <h3 class="text-white font-semibold text-lg mb-3">Support</h3>
       <ul class="space-y-2">
         <li><a href="/faq" class="hover:text-pink-400 transition">FAQ</a></li>
-        <li><a href="/contact" class="hover:text-pink-400 transition">Contact Us</a></li>
+        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdrSPKQcZZeeaMclGKoQFOWh7YkjnF6GZb8ke8TAVQhuGK_yw/viewform?usp=dialog" class="hover:text-pink-400 transition">Contact Us</a></li>
         <li><a href="/terms" class="hover:text-pink-400 transition">Terms & Conditions</a></li>
         <li><a href="/privacy" class="hover:text-pink-400 transition">Privacy Policy</a></li>
       </ul>
@@ -28,6 +28,6 @@
 
   <!-- Bottom line -->
   <div class="border-t border-gray-800 py-4 text-center text-sm text-gray-500">
-    © {new Date().getFullYear()} Dimecams. All rights reserved.
+    © {new Date().getFullYear()} Mycamfinder.com All Rights Reserved. All models are 18+ y.o.
   </div>
 </footer>
