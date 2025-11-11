@@ -53,7 +53,7 @@
       <p>Loading...</p>
     {:else}
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
-        {#each topModels.slice(0, visibleCount) as room}
+        {#each newModels.slice(0, visibleCount) as room}
           <RoomCard {room} />
         {/each}
       </div>
