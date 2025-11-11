@@ -19,8 +19,8 @@
       <ul class="space-y-2">
         <li><a href="/faq" class="hover:text-pink-400 transition">FAQ</a></li>
         <li><a href="/contact" class="hover:text-pink-400 transition">Contact Us</a></li>
-        <li><a href="/help" class="hover:text-pink-400 transition">Terms & Conditions</a></li>
-        <li><a href="/report" class="hover:text-pink-400 transition">Privacy Policy</a></li>
+        <li><a href="/terms" class="hover:text-pink-400 transition">Terms & Conditions</a></li>
+        <li><a href="/privacy" class="hover:text-pink-400 transition">Privacy Policy</a></li>
       </ul>
     </div>
 
