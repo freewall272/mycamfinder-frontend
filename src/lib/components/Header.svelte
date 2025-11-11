@@ -1,6 +1,10 @@
 <script>
   import { onMount } from 'svelte';
   import { tags, fetchRooms } from '$lib/roomsStore.js';
+  import { page } from '$app/stores';
+
+  // Get current route (e.g., '/', '/f', '/m', etc.)
+  $: currentPath = $page.url.pathname;
 
   // Fetch rooms/tags on mount (once)
   onMount(async () => {
@@ -43,8 +47,10 @@
     ] as g}
       <a
         href={`/${g.value}`}
-        class="flex-1 min-w-[70px] py-3 rounded-md font-semibold text-xs sm:text-sm uppercase tracking-wide text-center
-               bg-gray-800 text-white hover:bg-pink-600 hover:text-white transition"
+        class="flex-1 min-w-[70px] py-3 rounded-md font-semibold text-xs sm:text-sm uppercase tracking-wide text-center transition
+          {currentPath === `/${g.value}` || (currentPath === '/' && g.value === 'f')
+            ? 'bg-pink-600 text-white'
+            : 'bg-gray-800 text-white hover:bg-pink-600 hover:text-white'}"
       >
         {g.label}
       </a>
