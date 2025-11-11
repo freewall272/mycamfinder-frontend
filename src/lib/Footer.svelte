@@ -18,8 +18,9 @@
       <h3 class="text-white font-semibold text-lg mb-3">Support</h3>
       <ul class="space-y-2">
         <li><a href="/faq" class="hover:text-pink-400 transition">FAQ</a></li>
-        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdrSPKQcZZeeaMclGKoQFOWh7YkjnF6GZb8ke8TAVQhuGK_yw/viewform?usp=dialog" class="hover:text-pink-400 transition">Contact Us</a></li>
-        <li><a href="/terms" class="hover:text-pink-400 transition">Terms & Conditions</a></li>
+        <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdrSPKQcZZeeaMclGKoQFOWh7YkjnF6GZb8ke8TAVQhuGK_yw/viewform?usp=dialog" class="hover:text-pink-400 transition">DMCA Contact</a></li>
+        <li><a href="/terms" class="hover:text-pink-400 transition">Terms of Service</a></li>
+        <li><a href="/2257" class="hover:text-pink-400 transition">2257</a></li>
         <li><a href="/privacy" class="hover:text-pink-400 transition">Privacy Policy</a></li>
       </ul>
     </div>
