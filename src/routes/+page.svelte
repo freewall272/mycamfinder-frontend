@@ -3,13 +3,24 @@
   import { rooms, tags, loading, fetchRooms } from '$lib/roomsStore.js';
   import RoomCard from '$lib/components/RoomCard.svelte';
 
+  let screenWidth = 0;
+
+  // watch window resize
+  onMount(() => {
+    fetchRooms();
+    screenWidth = window.innerWidth;
+    window.addEventListener('resize', () => (screenWidth = window.innerWidth));
+  });
+
   // Derived top/new models
   $: females = $rooms.filter(r => r.gender === 'f');
-  $: topModels = [...females].sort((a, b) => b.num_users - a.num_users).slice(0, 20);
-  $: newModels = females.filter(r => r.is_new).slice(0, 20);
+  $: topModels = [...females].sort((a, b) => b.num_users - a.num_users);
+  $: newModels = females.filter(r => r.is_new);
 
-  onMount(fetchRooms);
+  // 👇 reactive limit: 6 if mobile (<640px), otherwise 14
+  $: visibleCount = screenWidth < 640 ? 6 : 14;
 </script>
+
 
 <main class="p-4 flex flex-col gap-12 bg-black text-white min-h-screen">
 
@@ -24,7 +35,7 @@
       <p>Loading...</p>
     {:else}
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
-        {#each topModels.slice(0, 14) as room}
+        {#each topModels.slice(0, visibleCount) as room}
           <RoomCard {room} />
         {/each}
       </div>
@@ -42,7 +53,7 @@
       <p>Loading...</p>
     {:else}
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
-        {#each newModels.slice(0, 14) as room}
+        {#each topModels.slice(0, visibleCount) as room}
           <RoomCard {room} />
         {/each}
       </div>
