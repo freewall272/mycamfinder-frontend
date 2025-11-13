@@ -33,7 +33,7 @@
   <!-- 🖼️ Logo -->
   <div class="flex items-center justify-center sm:justify-start px-6 py-3 border-b border-gray-800">
     <a href="/" class="flex items-center gap-3">
-      <img src="/logo.png" alt="Logo" class="h-8 w-auto object-contain" />
+      <img src="/logo.svg" alt="Logo" class="h-8 w-auto object-contain" />
       <h1 class="text-xl sm:text-2xl font-semibold tracking-wide">MyCamFinder</h1>
     </a>
   </div>
